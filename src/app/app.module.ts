@@ -23,6 +23,7 @@ import { RecetaDetalleComponent } from './components/receta-detalle/receta-detal
 import { RecetaTablaComponent } from './components/receta-tabla/receta-tabla.component';
 import { RecetaFormularioComponent } from './components/receta-formulario/receta-formulario.component';
 import { ConfirmacionEliminarComponent } from './components/confirmacion-eliminar/confirmacion-eliminar.component';
+import { DialogoAlertaComponent } from './components/dialogo-alerta/dialogo-alerta.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { ConfirmacionEliminarComponent } from './components/confirmacion-elimina
     RecetaDetalleComponent,
     RecetaTablaComponent,
     RecetaFormularioComponent,
-    ConfirmacionEliminarComponent
+    ConfirmacionEliminarComponent,
+    DialogoAlertaComponent
   ],
   imports: [
     BrowserModule,
