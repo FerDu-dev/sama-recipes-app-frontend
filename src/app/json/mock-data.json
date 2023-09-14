@@ -1,0 +1,20 @@
+
+
+[
+    {
+      "id": "1",
+      "foto": "assets\recipe1.jpg",
+      "titulo": "Receta 1",
+      "descripcion": "Descripción de la receta 1",
+      "ingredientes": ["Ingrediente 1", "Ingrediente 2"],
+      "instrucciones": "Instrucciones para la receta 1"
+    },
+    {
+      "id": "2",
+      "foto": "assets/recipe1.jpg",
+      "titulo": "Receta 2",
+      "descripcion": "Descripción de la receta 2",
+      "ingredientes": ["Ingrediente 1", "Ingrediente 2"],
+      "instrucciones": "Instrucciones para la receta 2"
+    }
+  ]

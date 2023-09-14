@@ -1,0 +1,28 @@
+<form [formGroup]="recetaForm" (ngSubmit)="onSubmit()">
+  <mat-form-field>
+    <mat-label>ID</mat-label>
+    <input matInput formControlName="id">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Título</mat-label>
+    <input matInput formControlName="titulo">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Descripción</mat-label>
+    <textarea matInput formControlName="descripcion"></textarea>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Ingredientes</mat-label>
+    <input matInput formControlName="ingredientes">
+    <mat-hint>Separar los ingredientes con comas</mat-hint>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Instrucciones</mat-label>
+    <textarea matInput formControlName="instrucciones"></textarea>
+  </mat-form-field>
+  <button mat-raised-button color="primary" type="submit">Guardar</button>
+  <button mat-button (click)="onCancel()">Cancelar</button>
+</form>
+
+
+

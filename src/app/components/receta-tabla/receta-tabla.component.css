@@ -1,0 +1,18 @@
+.mat-table {
+    width: 100%;
+    margin: 20px
+  }
+  
+  .mat-row, .mat-header-row {
+    display: flex;
+    align-items: center;
+  }
+  
+  .mat-cell, .mat-header-cell {
+    flex: 1;
+  }
+  
+  img {
+    width: 50px;
+  }
+  
