@@ -1,14 +1,21 @@
+<<<<<<< HEAD
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
+=======
+// services/auth.service.ts
+import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { loginUser, logoutUser } from '../../store/actions/user.action';
+>>>>>>> d8b1c78b35efe94457861436d35e4190936c61d2
 
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthService {
-  private users = [
-    { email: 'fernando@example.com', password: 'duno', role: 'admin' },
-    { email: 'jesus@example.com', password: 'aguilera', role: 'cliente' }
-  ];
+  constructor(private store: Store) {}
 
+<<<<<<< HEAD
   login(email: string, password: string) {
     return of(this.users.find(user => user.email === email && user.password === password)).pipe(
       delay(2000), // Simula una llamada a la API
@@ -21,15 +28,14 @@ export class AuthService {
         }
       })
     );
+=======
+  loginUser(email: string, password: string) {
+    this.store.dispatch(loginUser({ email, password }));
+>>>>>>> d8b1c78b35efe94457861436d35e4190936c61d2
   }
 
-  logout() {
-    localStorage.removeItem('currentUser');
-  }
-
-  get currentUser() {
-    const user = localStorage.getItem('currentUser');
-    return user ? JSON.parse(user) : null;
+  logoutUser() {
+    this.store.dispatch(logoutUser());
   }
 }
 

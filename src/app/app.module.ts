@@ -18,6 +18,10 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> d8b1c78b35efe94457861436d35e4190936c61d2
 import { AppComponent } from './app.component';
 import { recetaReducer } from 'src/store/reducers/reducer';
 import { AppRoutingModule } from './routing/app-routing.module';
@@ -29,7 +33,11 @@ import { RecetaFormularioComponent } from './components/receta-formulario/receta
 import { ConfirmacionEliminarComponent } from './components/confirmacion-eliminar/confirmacion-eliminar.component';
 import { DialogoAlertaComponent } from './components/dialogo-alerta/dialogo-alerta.component';
 import { RecetasEffects } from 'src/store/recetas.effects';
+<<<<<<< HEAD
 import { AuthEffects } from 'src/store/auth.effects';
+=======
+import { UserEffects } from 'src/store/users.effects';
+>>>>>>> d8b1c78b35efe94457861436d35e4190936c61d2
 
 @NgModule({
   declarations: [
@@ -47,7 +55,12 @@ import { AuthEffects } from 'src/store/auth.effects';
     FormsModule,
     RouterModule,
     MatButtonModule,
+<<<<<<< HEAD
     EffectsModule.forRoot([RecetasEffects, AuthEffects]),
+=======
+    EffectsModule.forRoot([RecetasEffects]),
+    EffectsModule.forRoot([UserEffects]),
+>>>>>>> d8b1c78b35efe94457861436d35e4190936c61d2
     MatInputModule,
     MatCardModule,
     MatTableModule,
