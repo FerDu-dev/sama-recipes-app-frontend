@@ -28,7 +28,23 @@ export class RecetaFormularioComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.receta) {
+      this.recetaForm = this.fb.group({
+        titulo: [this.receta.titulo, Validators.required],
+        descripcion: [this.receta.descripcion, Validators.required],
+        ingredientes: [this.receta.ingredientes.join(','), Validators.required],
+        instrucciones: [this.receta.instrucciones, Validators.required]
+      });
+    } else {
+      this.recetaForm = this.fb.group({
+        titulo: ['', Validators.required],
+        descripcion: ['', Validators.required],
+        ingredientes: ['', Validators.required],
+        instrucciones: ['', Validators.required]
+      });
+    }
+  }
 
   limpiarFormulario(): void {
     this.recetaForm.reset();
