@@ -18,7 +18,7 @@ export class LoginComponent {
     if (this.authService.login(this.email, this.password)) {
       this.router.navigate(['/home']);
     } else {
-      // Muestra un mensaje de error
+      console.log("error de autentificacion")
     }
   }
 }
