@@ -17,6 +17,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
+
 import { AppComponent } from './app.component';
 import { recetaReducer } from 'src/store/reducers/reducer';
 import { AppRoutingModule } from './routing/app-routing.module';
@@ -28,6 +29,7 @@ import { RecetaFormularioComponent } from './components/receta-formulario/receta
 import { ConfirmacionEliminarComponent } from './components/confirmacion-eliminar/confirmacion-eliminar.component';
 import { DialogoAlertaComponent } from './components/dialogo-alerta/dialogo-alerta.component';
 import { RecetasEffects } from 'src/store/recetas.effects';
+import { AuthEffects } from 'src/store/auth.effects';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,7 @@ import { RecetasEffects } from 'src/store/recetas.effects';
     FormsModule,
     RouterModule,
     MatButtonModule,
-    EffectsModule.forRoot([RecetasEffects]),
+    EffectsModule.forRoot([RecetasEffects, AuthEffects]),
     MatInputModule,
     MatCardModule,
     MatTableModule,

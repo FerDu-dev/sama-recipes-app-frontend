@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { AuthService } from 'src/app/services/auth-service.service';
-import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import * as AuthActions from '../../../store/actions/auth.action';
 
 @Component({
   selector: 'app-home',
@@ -8,10 +8,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private store: Store) {}
 
   logout() {
-    this.authService.logout();
-    this.router.navigate(['/login']);
+    this.store.dispatch(AuthActions.logout());
   }
 }

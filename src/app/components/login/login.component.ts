@@ -1,7 +1,7 @@
-// login.component.ts
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth-service.service';
+import { Store } from '@ngrx/store';
+import * as AuthActions from '../../../store/actions/auth.action';
 
 @Component({
   selector: 'app-login',
@@ -12,14 +12,11 @@ export class LoginComponent {
   email = '';
   password = '';
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private store: Store, private router: Router) { }
 
   login() {
-    if (this.authService.login(this.email, this.password)) {
-      this.router.navigate(['/home']);
-    } else {
-      console.log("error de autentificacion")
-    }
+    this.store.dispatch(AuthActions.login({ email: this.email, password: this.password }));
   }
 }
+
 
