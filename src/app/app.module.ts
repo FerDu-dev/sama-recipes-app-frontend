@@ -13,7 +13,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
-
+import { EffectsModule } from '@ngrx/effects';
 
 import { AppComponent } from './app.component';
 import { recetaReducer } from 'src/store/reducers/reducer';
@@ -24,6 +24,7 @@ import { RecetaTablaComponent } from './components/receta-tabla/receta-tabla.com
 import { RecetaFormularioComponent } from './components/receta-formulario/receta-formulario.component';
 import { ConfirmacionEliminarComponent } from './components/confirmacion-eliminar/confirmacion-eliminar.component';
 import { DialogoAlertaComponent } from './components/dialogo-alerta/dialogo-alerta.component';
+import { RecetasEffects } from 'src/store/recetas.effects';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { DialogoAlertaComponent } from './components/dialogo-alerta/dialogo-aler
     FormsModule,
     RouterModule,
     MatButtonModule,
+    EffectsModule.forRoot([RecetasEffects]),
     MatInputModule,
     MatCardModule,
     MatTableModule,

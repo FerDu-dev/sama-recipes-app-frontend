@@ -14,6 +14,7 @@ export class RecetasEffects implements OnInitEffects {
       tap(() => {
         this.store.select((state: any) => state.recetas as Receta[]).subscribe(recetas => {
           localStorage.setItem('recetas', JSON.stringify(recetas));
+          console.log('Recetas guardadas en el LocalStorage:', recetas);
         });
       })
     ),
@@ -27,5 +28,3 @@ export class RecetasEffects implements OnInitEffects {
 
   constructor(private actions$: Actions, private store: Store) {}
 }
-
-
