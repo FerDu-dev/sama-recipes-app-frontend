@@ -9,6 +9,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -19,6 +21,7 @@ import { AppComponent } from './app.component';
 import { recetaReducer } from 'src/store/reducers/reducer';
 import { AppRoutingModule } from './routing/app-routing.module';
 import { LoginComponent } from './components/login/login.component';
+import { HomeComponent } from './pages/home/home.component';
 import { RecetaDetalleComponent } from './components/receta-detalle/receta-detalle.component';
 import { RecetaTablaComponent } from './components/receta-tabla/receta-tabla.component';
 import { RecetaFormularioComponent } from './components/receta-formulario/receta-formulario.component';
@@ -30,6 +33,7 @@ import { RecetasEffects } from 'src/store/recetas.effects';
   declarations: [
     AppComponent,
     LoginComponent,
+    HomeComponent,
     RecetaDetalleComponent,
     RecetaTablaComponent,
     RecetaFormularioComponent,
@@ -45,6 +49,8 @@ import { RecetasEffects } from 'src/store/recetas.effects';
     MatInputModule,
     MatCardModule,
     MatTableModule,
+    MatToolbarModule,
+    MatSnackBarModule,
     MatIconModule,
     MatDialogModule,
     MatFormFieldModule,
@@ -54,6 +60,7 @@ import { RecetasEffects } from 'src/store/recetas.effects';
     StoreModule.forRoot({ recetas: recetaReducer }),
     AppRoutingModule
   ],
+  
   providers: [],
   bootstrap: [AppComponent]
 })

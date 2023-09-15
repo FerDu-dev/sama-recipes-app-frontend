@@ -3,11 +3,13 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { MatDrawer } from '@angular/material/sidenav';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { RecetasService } from 'src/app/services/recetas.service';
 import { Receta } from 'src/models/receta.model';
 import { ConfirmacionEliminarComponent } from '../confirmacion-eliminar/confirmacion-eliminar.component';
 import { RecetaFormularioComponent } from '../receta-formulario/receta-formulario.component';
 import { AppState } from 'src/models/state.model';
+import { RecetaDetalleComponent } from '../receta-detalle/receta-detalle.component';
 
 @Component({
   selector: 'app-receta-tabla',
@@ -20,19 +22,31 @@ export class RecetaTablaComponent implements OnInit {
   editar: boolean = false;
   recetaSeleccionada: Receta | null = null;
 
-  constructor(private store: Store<AppState>, private dialog: MatDialog, private recetasService: RecetasService) {
+  constructor(private store: Store<AppState>, private snackBar: MatSnackBar,private dialog: MatDialog, private recetasService: RecetasService) {
     this.recetas$ = this.store.select(state => state.recetas);
   }
 
   ngOnInit(): void {}
 
   verReceta(id: string): void {
-    // Aquí puedes definir la lógica para visualizar una receta
+    this.recetas$.subscribe(recetas => {
+      const receta = recetas.find((receta: Receta) => receta.id === id);
+      if (receta) {
+        this.dialog.open(RecetaDetalleComponent, {
+          width: '500px',
+          height: '480px',
+          data: receta,
+        });
+      }
+    });
   }
 
   agregarReceta(receta: Receta): void {
     this.recetasService.agregarReceta(receta);
     console.log(receta);
+    this.snackBar.open('Receta creada exitosamente', '', {
+      duration: 2000,  // Duración en milisegundos después de la cual se cerrará automáticamente el snackbar.
+    });
   }
 
   abrirDrawer(): void {
@@ -50,12 +64,16 @@ export class RecetaTablaComponent implements OnInit {
 
   eliminarReceta(id: string): void {
     const dialogRef = this.dialog.open(ConfirmacionEliminarComponent, {
+      width: '500px',
       data: { titulo: '¿Estás seguro de que deseas eliminar esta receta?' }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.recetasService.eliminarReceta(id);
+        this.snackBar.open('Receta eliminada exitosamente', '', {
+          duration: 2000,
+        });
       }
     });
   }
@@ -68,4 +86,3 @@ export class RecetaTablaComponent implements OnInit {
     }
   }
 }
-

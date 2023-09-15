@@ -1,22 +1,27 @@
 
 <div class="login-container">
-    <mat-card>
-      <mat-card-header>
-        <mat-card-title>Iniciar sesión</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <form (submit)="login()">
-          <mat-form-field>
-            <mat-label>Email</mat-label>
-            <input matInput [(ngModel)]="email" name="email" type="email">
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Contraseña</mat-label>
-            <input matInput [(ngModel)]="password" name="password" type="password">
-          </mat-form-field>
-          <button mat-raised-button color="primary" type="submit">Iniciar sesión</button>
-        </form>
-      </mat-card-content>
-    </mat-card>
-  </div>
+  <mat-card>
+    <mat-card-header>
+      <div>
+        <mat-card-title class="white-text">Iniciar sesión</mat-card-title>
+        <p class="white-text">Iniciar sesión en tu cuenta</p>
+
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+      <form (submit)="login()">
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input matInput [(ngModel)]="email" name="email" type="email">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Contraseña</mat-label>
+          <input matInput [(ngModel)]="password" name="password" type="password">
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit">Iniciar sesión</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
+
   
