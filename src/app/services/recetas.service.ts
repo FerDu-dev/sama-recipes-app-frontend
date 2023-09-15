@@ -13,7 +13,7 @@ export class RecetasService {
     this.store.dispatch(agregarReceta({ receta }));
   }
 
-  editarReceta(receta: Receta) {
+  actualizarReceta(receta: Receta) {
     this.store.dispatch(actualizarReceta({ receta }));
   }
 
@@ -21,3 +21,4 @@ export class RecetasService {
     this.store.dispatch(eliminarReceta({ id }));
   }
 }
+

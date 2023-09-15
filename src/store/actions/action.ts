@@ -15,3 +15,8 @@ export const eliminarReceta = createAction(
   '[Receta] Eliminar Receta',
   props<{ id: string }>()
 );
+
+export const cargarRecetas = createAction(
+  '[Receta] Cargar Recetas',
+  props<{ recetas: Receta[] }>()
+);

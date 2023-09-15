@@ -1,12 +1,9 @@
 
-
-
-
 <mat-drawer-container class="example-container">
 
   <mat-drawer #drawer mode="side" position="end" opened="false">
-    <app-receta-formulario *ngIf="!editar" (formSubmit)="agregarReceta($event); drawer.close()" (formCancel)="drawer.close()"></app-receta-formulario>
-    <app-receta-formulario *ngIf="editar && recetaSeleccionada" [receta]="recetaSeleccionada" (formSubmit)="editarReceta(recetaSeleccionada.id); drawer.close()" (formCancel)="drawer.close()"></app-receta-formulario>
+    <app-receta-formulario *ngIf="!editar" (formSubmit)="handleFormSubmit($event); drawer.close()" (formCancel)="drawer.close()"></app-receta-formulario>
+    <app-receta-formulario *ngIf="editar && recetaSeleccionada" [receta]="recetaSeleccionada" (formSubmit)="handleFormSubmit($event); drawer.close()" (formCancel)="drawer.close()"></app-receta-formulario>
   </mat-drawer>
   
   <mat-drawer-content>

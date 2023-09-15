@@ -46,7 +46,6 @@ export class RecetaTablaComponent implements OnInit {
       this.recetaSeleccionada = recetas.find((receta: Receta) => receta.id === id) || null;
     });
     this.drawer.open();
-    
   }
 
   eliminarReceta(id: string): void {
@@ -59,6 +58,14 @@ export class RecetaTablaComponent implements OnInit {
         this.recetasService.eliminarReceta(id);
       }
     });
+  }
+
+  handleFormSubmit(receta: Receta): void {
+    if (this.editar) {
+      this.recetasService.actualizarReceta(receta);
+    } else {
+      this.agregarReceta(receta);
+    }
   }
 }
 

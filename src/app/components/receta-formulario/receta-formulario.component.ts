@@ -5,6 +5,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogoAlertaComponent } from '../dialogo-alerta/dialogo-alerta.component';
 import { Receta } from 'src/models/receta.model';
 import { v4 as uuidv4 } from 'uuid';
+import { Store } from '@ngrx/store';
+
 
 @Component({
   selector: 'app-receta-formulario',
@@ -17,7 +19,7 @@ export class RecetaFormularioComponent implements OnInit {
   @Output() formSubmit = new EventEmitter<Receta>();
   @Output() formCancel = new EventEmitter<void>()
 
-  constructor(private fb: FormBuilder, private recetasService: RecetasService, private dialog: MatDialog) {
+  constructor(private store: Store,private fb: FormBuilder, private recetasService: RecetasService, private dialog: MatDialog) {
     this.recetaForm = this.fb.group({
       titulo: ['', Validators.required],
       descripcion: ['', Validators.required],
@@ -28,9 +30,16 @@ export class RecetaFormularioComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  limpiarFormulario(): void {
+    this.recetaForm.reset();
+    Object.values(this.recetaForm.controls).forEach(control => {
+      control.markAsUntouched();
+    });
+  }
+
   onSubmit(): void {
     if (this.recetaForm.valid) {
-      const id = uuidv4();
+      const id = this.receta ? this.receta.id : uuidv4();
       const receta = new Receta(
         id,
         this.recetaForm.value.titulo,
@@ -39,14 +48,13 @@ export class RecetaFormularioComponent implements OnInit {
         this.recetaForm.value.instrucciones
       );
       this.formSubmit.emit(receta);
-      this.recetaForm.reset(); // Limpia el formulario
-      Object.values(this.recetaForm.controls).forEach(control => {
-        control.markAsUntouched();
-      });
+      this.limpiarFormulario();
     } else if (this.recetaForm.touched) {
       this.dialog.open(DialogoAlertaComponent);
     }
   }
+  
+  
   
 
   onCancel(): void {
