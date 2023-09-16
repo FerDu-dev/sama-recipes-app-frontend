@@ -10,6 +10,7 @@ import { ConfirmacionEliminarComponent } from '../confirmacion-eliminar/confirma
 import { RecetaFormularioComponent } from '../receta-formulario/receta-formulario.component';
 import { AppState } from 'src/models/state.model';
 import { RecetaDetalleComponent } from '../receta-detalle/receta-detalle.component';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-receta-tabla',
@@ -19,6 +20,7 @@ import { RecetaDetalleComponent } from '../receta-detalle/receta-detalle.compone
 export class RecetaTablaComponent implements OnInit {
   recetas$: Observable<Receta[]>;
   @ViewChild('drawer') drawer!: MatDrawer;
+  @ViewChild(RecetaFormularioComponent) formularioComponent!: RecetaFormularioComponent;
   editar: boolean = false;
   recetaSeleccionada: Receta | null = null;
 
@@ -50,16 +52,20 @@ export class RecetaTablaComponent implements OnInit {
   }
 
   abrirDrawer(): void {
+    this.editar = false;
+    this.recetaSeleccionada = null;
     this.drawer.open();
   }
   
 
   editarReceta(id: string): void {
     this.editar = true;
-    this.recetas$.subscribe(recetas => {
+    this.recetas$.pipe(take(1)).subscribe(recetas => {
       this.recetaSeleccionada = recetas.find((receta: Receta) => receta.id === id) || null;
+      if (!this.drawer.opened) {
+        this.drawer.open();
+      }
     });
-    this.drawer.open();
   }
 
   eliminarReceta(id: string): void {
@@ -84,5 +90,6 @@ export class RecetaTablaComponent implements OnInit {
     } else {
       this.agregarReceta(receta);
     }
+    this.formularioComponent.limpiarFormulario();
   }
 }

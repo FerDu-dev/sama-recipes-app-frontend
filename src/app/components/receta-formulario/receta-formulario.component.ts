@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RecetasService } from 'src/app/services/recetas.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -13,7 +13,8 @@ import { Store } from '@ngrx/store';
   templateUrl: './receta-formulario.component.html',
   styleUrls: ['./receta-formulario.component.css']
 })
-export class RecetaFormularioComponent implements OnInit {
+
+export class RecetaFormularioComponent implements OnInit, OnChanges {
   recetaForm: FormGroup;
   @Input() receta!: Receta;
   @Output() formSubmit = new EventEmitter<Receta>();
@@ -21,33 +22,34 @@ export class RecetaFormularioComponent implements OnInit {
 
   constructor(private store: Store,private fb: FormBuilder, private recetasService: RecetasService, private dialog: MatDialog) {
     this.recetaForm = this.fb.group({
-      titulo: ['', Validators.required],
-      descripcion: ['', Validators.required],
-      ingredientes: ['', Validators.required],
-      instrucciones: ['', Validators.required]
+      titulo: [''],
+      descripcion: [''],
+      ingredientes: [''],
+      instrucciones: ['']
     });
   }
 
   ngOnInit(): void {
-    if (this.receta) {
-      this.recetaForm = this.fb.group({
-        titulo: [this.receta.titulo, Validators.required],
-        descripcion: [this.receta.descripcion, Validators.required],
-        ingredientes: [this.receta.ingredientes.join(','), Validators.required],
-        instrucciones: [this.receta.instrucciones, Validators.required]
-      });
-    } else {
-      this.recetaForm = this.fb.group({
-        titulo: ['', Validators.required],
-        descripcion: ['', Validators.required],
-        ingredientes: ['', Validators.required],
-        instrucciones: ['', Validators.required]
-      });
+    this.setFormValues();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['receta'] && changes['receta'].currentValue !== changes['receta'].previousValue) {
+      this.setFormValues();
     }
   }
 
-  limpiarFormulario(): void {
-    this.recetaForm.reset();
+  setFormValues(): void {
+    if (this.receta) {
+      this.recetaForm.setValue({
+        titulo: this.receta.titulo,
+        descripcion: this.receta.descripcion,
+        ingredientes: this.receta.ingredientes.join(','),
+        instrucciones: this.receta.instrucciones
+      });
+    } else {
+      this.recetaForm.reset();
+    }
     Object.values(this.recetaForm.controls).forEach(control => {
       control.markAsUntouched();
     });
@@ -64,20 +66,22 @@ export class RecetaFormularioComponent implements OnInit {
         this.recetaForm.value.instrucciones
       );
       this.formSubmit.emit(receta);
-      this.limpiarFormulario();
+      this.setFormValues();
     } else if (this.recetaForm.touched) {
       this.dialog.open(DialogoAlertaComponent);
     }
   }
-  
-  
-  
 
   onCancel(): void {
+   
+    this.limpiarFormulario();
+    this.formCancel.emit();
+  }
+
+  limpiarFormulario(): void {
     this.recetaForm.reset();
     Object.values(this.recetaForm.controls).forEach(control => {
       control.markAsUntouched();
     });
-    this.formCancel.emit();
   }
 }

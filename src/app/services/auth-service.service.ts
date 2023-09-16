@@ -16,12 +16,13 @@ export class AuthService {
 
   login(email: string, password: string) {
     return of(this.users.find(user => user.email === email && user.password === password)).pipe(
-      delay(2000), // Simula una llamada a la API
+      delay(2000), // Simular una llamada a la API
       map(user => {
         if (user) {
           localStorage.setItem('currentUser', JSON.stringify(user));
           return user;
         } else {
+          console.log("user cant login")
           throw new Error('Usuario no registrado');
         }
       })
