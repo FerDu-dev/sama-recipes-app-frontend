@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
-import * as AuthActions from '../../store/actions/auth.action';
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +33,6 @@ export class AuthService {
   logoutUser() {
     delay(2000), 
     localStorage.removeItem('currentUser');
-    // this.store.dispatch(AuthActions.logout());
   }
 }
 

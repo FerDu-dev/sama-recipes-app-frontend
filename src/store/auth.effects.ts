@@ -28,7 +28,6 @@ this.actions$.pipe(
   ofType(AuthActions.logout),
   tap(() => {
     this.authService.logoutUser();
-    // this.router.navigate(['/login']);
   })
 ),
 { dispatch: false }
