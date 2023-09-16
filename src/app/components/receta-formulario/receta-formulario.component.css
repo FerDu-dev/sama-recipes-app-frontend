@@ -10,4 +10,13 @@
   mat-form-field {
     width: 100%;
   }
+
+  .ng-invalid.ng-touched .mat-form-field-label {
+    color: red;
+  }
+  
+  .ng-invalid.ng-touched .mat-form-field-underline {
+    background-color: red;
+  }
+  
   

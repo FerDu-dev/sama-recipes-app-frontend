@@ -6,6 +6,8 @@ import { DialogoAlertaComponent } from '../dialogo-alerta/dialogo-alerta.compone
 import { Receta } from 'src/models/receta.model';
 import { v4 as uuidv4 } from 'uuid';
 import { Store } from '@ngrx/store';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 
 @Component({
@@ -20,7 +22,7 @@ export class RecetaFormularioComponent implements OnInit, OnChanges {
   @Output() formSubmit = new EventEmitter<Receta>();
   @Output() formCancel = new EventEmitter<void>()
 
-  constructor(private store: Store,private fb: FormBuilder, private recetasService: RecetasService, private dialog: MatDialog) {
+  constructor(private store: Store,private fb: FormBuilder, private recetasService: RecetasService, private dialog: MatDialog, private snackBar: MatSnackBar) {
     this.recetaForm = this.fb.group({
       titulo: [''],
       descripcion: [''],
@@ -56,7 +58,7 @@ export class RecetaFormularioComponent implements OnInit, OnChanges {
   }
 
   onSubmit(): void {
-    if (this.recetaForm.valid) {
+    if (this.validateForm()) {
       const id = this.receta ? this.receta.id : uuidv4();
       const receta = new Receta(
         id,
@@ -67,14 +69,22 @@ export class RecetaFormularioComponent implements OnInit, OnChanges {
       );
       this.formSubmit.emit(receta);
       this.setFormValues();
-    } else if (this.recetaForm.touched) {
-      this.dialog.open(DialogoAlertaComponent);
+    } else {
+      Object.values(this.recetaForm.controls).forEach(control => {
+        control.markAsTouched();
+      });
+      this.snackBar.open('Por favor, rellena todos los campos', '', {
+        duration: 2000,
+      });
     }
   }
 
+  validateForm(): boolean {
+    return Object.values(this.recetaForm.controls).every(control => control.value);
+  }
+
   onCancel(): void {
-   
-    this.limpiarFormulario();
+    this.setFormValues();
     this.formCancel.emit();
   }
 
@@ -85,3 +95,4 @@ export class RecetaFormularioComponent implements OnInit, OnChanges {
     });
   }
 }
+
