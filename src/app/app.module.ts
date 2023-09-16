@@ -28,7 +28,7 @@ import { RecetaFormularioComponent } from './components/receta-formulario/receta
 import { ConfirmacionEliminarComponent } from './components/confirmacion-eliminar/confirmacion-eliminar.component';
 import { DialogoAlertaComponent } from './components/dialogo-alerta/dialogo-alerta.component';
 import { RecetasEffects } from 'src/store/recetas.effects';
-
+import { AuthEffects } from 'src/store/auth.effects';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,7 +45,7 @@ import { RecetasEffects } from 'src/store/recetas.effects';
     FormsModule,
     RouterModule,
     MatButtonModule,
-    EffectsModule.forRoot([RecetasEffects]),
+    EffectsModule.forRoot([RecetasEffects, AuthEffects]),
     MatInputModule,
     MatCardModule,
     MatTableModule,

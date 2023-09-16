@@ -14,7 +14,7 @@ export class AuthEffects {
     switchMap(action =>
       this.authService.login(action.email, action.password).pipe(
         map(user => {
-          this.router.navigate(['/home']); // Añade esta línea
+          this.router.navigate(['/home']); 
           return AuthActions.loginSuccess({ user: { ...user, error: null } });
         }),
         catchError(error => of(AuthActions.loginFailure({ error })))
@@ -23,16 +23,16 @@ export class AuthEffects {
   )
 );
 
-  logout$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(AuthActions.logout),
-      tap(() => {
-        this.authService.logout();
-        this.router.navigate(['/login']);
-      })
-    ),
-    { dispatch: false }
-  );
+logout$ = createEffect(() =>
+this.actions$.pipe(
+  ofType(AuthActions.logout),
+  tap(() => {
+    this.authService.logoutUser();
+    // this.router.navigate(['/login']);
+  })
+),
+{ dispatch: false }
+);
 
   constructor(private actions$: Actions, private authService: AuthService, private router: Router) {}
 }
