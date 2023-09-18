@@ -47,7 +47,7 @@ export class RecetaTablaComponent implements OnInit {
     this.recetasService.agregarReceta(receta);
     console.log(receta);
     this.snackBar.open('Receta creada exitosamente', '', {
-      duration: 2000,  // Duración en milisegundos después de la cual se cerrará automáticamente el snackbar.
+      duration: 2000,  
     });
   }
 
